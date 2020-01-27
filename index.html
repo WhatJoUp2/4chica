@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt">
+	<head>
+		<meta charset="utf-8" />
+		<title>Woop</title>
+		<style>
+			html, body{
+				height: 100%;
+				margin: 0;
+			}
+			body {
+				display: flex;
+   		 		justify-content: center;
+    			align-items: center;
+				background-color: #444;
+			}
+			button{
+				background-color:transparent;
+				border:0px;
+				border-radius: 10px;
+				box-shadow: 0 3px 8px 1px #312f2c7a;
+			}
+			h1{
+				width: 460px;
+				text-align: center;
+				font-family: monospace;
+				font-size: 40px;
+				font-weight: normal;
+			}
+			.btF{
+				height:100px;
+				width:100px;
+				font-size:75px;
+			}
+			#container{
+				/* display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%; */
+				background-color: #ccc;
+				padding: 30px;
+    			border-radius: 20px;
+			}
+		</style>
+		<script>
+			var state=0;
+			var msg=["N","S","U","D","E"];
+			var palet=["#08415C","#CC2936","#6B818C","#F1BF98","#EEE5E9"];
+			var done=false;
+			var btArray=[
+				{value:3, color:0, letter:"S"},
+				{value:2, color:1, letter:"E"},
+				{value:3, color:2, letter:"N"},
+				{value:0, color:3, letter:"D"},
+				{value:3, color:2, letter:"N"},
+				{value:4, color:4, letter:"U"},
+				{value:0, color:3, letter:"D"},
+				{value:2, color:1, letter:"E"}
+			];
+			function inic(){
+				
+				for(i=1;i<=8;i++)
+					btArray[i-1].ref=document.getElementById("bt"+i);
+				updBt();
+			}
+			function updBt(){
+				for(i=0;i<8;i++){
+					btArray[i].ref.childNodes[0].innerHTML=(done)?(btArray[i].letter):(msg[btArray[i].value]);
+					btArray[i].ref.style.backgroundColor=palet[btArray[i].color];
+					btArray[i].ref.style.color=palet[(btArray[i].color+1)%5];
+				}
+			}
+			function btAction(i){
+				var j;
+				for(j=0;j<8;j++){
+					if(btArray[i].letter==btArray[j].letter)
+						btArray[j].value=(btArray[j].value+1)%5;
+				}
+				updBt();
+				for(j=0;j<8;j++){
+					if(msg[btArray[j].value]!=btArray[j].letter)
+						return 0;
+				}
+				win();
+			}
+			async function win(){
+				var j;
+				done=true;
+				for(j=0;j<8;j++)
+					btArray[j].color=0;
+				updBt();
+				await sleep(1500);
+				for(j=0;j<8;j++)
+					btArray[j].color=1;
+				updBt();
+				await sleep(1500);
+				for(j=0;j<8;j++)
+					btArray[j].color=2;
+				updBt();
+				await sleep(1500);
+				for(j=0;j<8;j++){
+					btArray[j].color=3;
+					btArray[j].letter=" ";
+				}
+				btArray[0].letter="J";
+				btArray[4].letter="K";
+				updBt();
+				await sleep(1500);
+				btArray[0].letter="L";
+				btArray[1].letter="O";
+				btArray[2].letter="V";
+				btArray[3].letter="E";
+				btArray[4].letter=" ";
+				btArray[5].letter="Y";
+				btArray[6].letter="O";
+				btArray[7].letter="U";
+				for(j=0;j<8;j++)
+					btArray[j].color=4;
+				updBt();
+			}
+			function sleep(ms) {
+				return new Promise(resolve => setTimeout(resolve, ms));
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<h1>A blast from our past! You'll do it, just like I did this game 👏</h1>
+			<table id="base">
+				<tr>
+					<td><button id="bt1" onclick="btAction(0)"><div class="btF"></div></button></td>
+					<td><button id="bt2" onclick="btAction(1)"><div class="btF"></div></button></td>
+					<td><button id="bt3" onclick="btAction(2)"><div class="btF"></div></button></td>
+					<td><button id="bt4" onclick="btAction(3)"><div class="btF"></div></button></td>
+				</tr>
+				<tr>
+					<td><button id="bt5" onclick="btAction(4)"><div class="btF"></div></button></td>
+					<td><button id="bt6" onclick="btAction(5)"><div class="btF"></div></button></td>
+					<td><button id="bt7" onclick="btAction(6)"><div class="btF"></div></button></td>
+					<td><button id="bt8" onclick="btAction(7)"><div class="btF"></div></button></td>
+				</tr>
+			</table>
+		</div>
+		<script>
+			inic();
+		</script>
+	</body>
+</html>
+
+<!-- JK LOVE YOOOOOU! 
+	        ,-\';__.
+          ./ ( _\)_\\
+         //  )(e (e( )  <--- WHAT A POSE
+        ( ` (    > //
+       __\__/' __=/`\
+      /'    ` ~/ )   )
+     |  _      ,(_,_/
+     /  /\  o )   o)\   <--- Small tities... sexy ;P
+    /  , \` -     -  \___
+ __/  /___\       |\____, \____________
+ __\  \_ __\    c '_____). \____ ______|
+ ___`o=._  /   _.-'\____ '\/_________|
+    /  |  /_.-' _.-')  '''     '
+   -.-/_ |___.-'_/  |          |
+      (_\_r     \   |          |
+        q_|     `   |          |
+         ||\     '  '          |
+         `I \       |          |
+             \    \ |          '
+              ) ' / /          |
+             /   / /           |
+  '         ,   / /            |
+ ___________|  / /_____________.____
+ ___________| / /___________________|_
+ ___________/(`(______________________|
+           / |  \ .
+      ..  |  ,`._\
+          '-'
+-->
